@@ -6,7 +6,7 @@ public class Account {
     ArrayList<String> friendName = new ArrayList<String>();
     ArrayList<Community> communityMember = new ArrayList<Community>();
     ArrayList<Community> communityHost = new ArrayList<Community>();
-    ArrayList<String> frRequest = new ArrayList<String>();
+    ArrayList<String> friendRequest = new ArrayList<String>();
     ArrayList<Message> msgSent = new ArrayList<Message>();
     ArrayList<Message> msgReceived = new ArrayList<Message>();
     public String name;
@@ -50,9 +50,9 @@ public class Account {
         this.nickname = nick;
     }
 
-    public void add_request(String friend_name)
+    public void add_request(String friendName)
     {
-        frRequest.add(friend_name);
+        friendRequest.add(friendName);
     }
 
     public void add_friend(Account friend)
