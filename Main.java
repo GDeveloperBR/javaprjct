@@ -11,7 +11,7 @@ public class Main {
 
             while((aux1 != 3) && (aux2 != 2))
             {
-                System.out.println("What do you want to do?.\n[1] - SignUp\n[2] - SignIn");
+                System.out.println("-->> What do you want to do? <<--\n[1] - SignUp\n[2] - LogIn");
                 aux1 = input.nextInt();
                 String username;
                 String password;
@@ -19,6 +19,7 @@ public class Main {
                 switch(aux1)
                 {
                     case 1:
+                        //System.out.print("Linha 22");
                         System.out.print("\nFirst name: ");
                         input.nextLine();
                         name = input.nextLine();
@@ -28,9 +29,7 @@ public class Main {
                             System.out.print("\nName in use, try another:");
                             name = input.nextLine();
                         }
-
-                        System.out.print("Password: ");
-                        password = input.nextLine();
+                        iface.names.add(name);
 
                         System.out.print("User: ");
                         username = input.nextLine();
@@ -40,45 +39,49 @@ public class Main {
                             System.out.print("\nUsername in use, try another:");
                             username = input.nextLine();
                         }
-                        Account newAccount = new Account(name, password, username);
-                        iface.names.add(name);
                         iface.nickNames.add(username);
+                        System.out.print("Password: ");
+                        password = input.nextLine();
                         iface.passwords.add(password);
-                        iface.add(newAccount);
 
+                        Account newAccount = new Account(name, password, username);
+                        iface.add(newAccount);
                         System.out.print("\nAccount created.\n\n");
-                        System.out.print("What do you want to do?\n[1] - LogIn;\n[2] - Exit\n");
-                        aux2 = input.nextInt();
                     case 2:
-                        System.out.print("\nUser:");
-                        input.nextLine();
+                        //System.out.print("Linha 52");
+                        System.out.print("\nUser: ");
+                        //input.nextLine();
                         username = input.nextLine();
 
-                        System.out.print("Password:");
+                        System.out.print("Password: ");
                         password = input.nextLine();
 
                         while(!(iface.nickNames.contains(username)) || !iface.passwords.contains(password)
                         || ((iface.nickNames.indexOf(username)) != iface.passwords.indexOf(password)))
                         {
-                            System.out.print("\nWe do not found you in system, try again\nUser:\n");
+                            System.out.print("\nWe do not found you in system, try again\nUser: ");
                             username = input.nextLine();
 
-                            if(Objects.equals(username,"0")) break;
+                            if(Objects.equals(username,"0"))
+                            {
+                                break;
+                            }
 
-                            System.out.print("Password:");
+                            System.out.print("Password: ");
                             password = input.nextLine();
                         }
                             if(!Objects.equals(username,"0"))
                         {
-                            int index = iface.nickNames.indexOf(username);
-                            Account logged = iface.accounts.get(index);
-                            name = iface.names.get(index);
+                            int otoAux = iface.nickNames.indexOf(username);
+                            Account logged = iface.accounts.get(otoAux);
+                            name = iface.names.get(otoAux);
 
-                            System.out.print("\n-- You're logged in --\n\n");
+                            System.out.print("\n-->> Welcome, you're logged in " + logged.getNick());
+                            System.out.print(" <<--\n\n");
                             int menuNavigation = 1;
                             while(menuNavigation != 14)
                             {
-                                System.out.println("What do you want to do?\n[1] - Change profile\n[2] - Account info\n[3] - Add new friend\n[4] - Friend requests\n[5] - Friends\n[6] - Send message\n[7] - New messages\n[8] - Chats\n[9] - New community\n[10] - Search community\n[11] - Community admin painel\n[12] - Community list\n[13] - Delete my profile\n[14] - Logout");
+                                System.out.println("-->> What do you want to do? <<-- \n[1] - Change profile\n[2] - Account info\n[3] - Add new friend\n[4] - Friend requests\n[5] - Friends\n[6] - Send message\n[7] - New messages\n[8] - Chats\n[9] - New community\n[10] - Search community\n[11] - Community admin painel\n[12] - Community list\n[13] - Delete my profile (UNDER MAINTENANCE!)\n[14] - Logout");
                                 //AINDA FALTA FAZER A FUNÇÃO LOGOUT!!!
                                 menuNavigation = input.nextInt();
                                 if(menuNavigation == 1)
@@ -94,15 +97,8 @@ public class Main {
                                             name = input.nextLine();
                                         }
                                         logged.setName(name);
-                                        iface.set(logged, index);
-                                        iface.names.set(index, name);
-                                        //Senha
-                                        System.out.print("New password: ");
-                                        //input.nextLine();
-                                        password = input.nextLine();
-                                        logged.setPassword(password);
-                                        iface.set(logged, index);
-                                        iface.passwords.set(index, password);
+                                        iface.set(logged, otoAux);
+                                        iface.names.set(otoAux, name);
                                         //Usuario
                                         System.out.print("New username: ");
                                         //input.nextLine();
@@ -113,16 +109,25 @@ public class Main {
                                             username = input.nextLine();
                                         }
                                         logged.setNick(username);
-                                        iface.set(logged, index);
-                                        iface.nickNames.set(index, username);
+                                        //Senha
+                                        System.out.print("New password: ");
+                                        //input.nextLine();
+                                        password = input.nextLine();
+                                        logged.setPassword(password);
+                                        iface.set(logged, otoAux);
+                                        iface.passwords.set(otoAux, password);
+                                        iface.set(logged, otoAux);
+                                        iface.nickNames.set(otoAux, username);
 
                                     System.out.print("\nChanges saved\n\n");
                                 }
                                 if(menuNavigation == 2)
                                 {
-                                    System.out.print("\nNickname:" + logged.getNick());
-                                    System.out.print("\nUsername:" + logged.getName());
-                                    System.out.print("\nPassword:" + logged.getPassword());
+                                    System.out.print("-->> These are your account info <<--\n");
+                                    System.out.print("\nName: " + logged.getName());
+                                    System.out.print("\nUser: " + logged.getNick());              
+                                    System.out.print("\nPassword: " + logged.getPassword());
+                                    System.out.print("\n\n");
                                 }
                                 if(menuNavigation == 3)
                                 {
@@ -132,7 +137,7 @@ public class Main {
 
                                     while(((!iface.names.contains(friendName)) && (!Objects.equals(friendName,"0"))) || (Objects.equals(friendName, logged.getName())))
                                     {
-                                        System.out.print("\nFriend was not found. Try again\nFriend's name:\n\n");
+                                        System.out.print("\nFriend was not found.\n\n");
                                         System.out.print("[0] - Back to menu\n");
                                         friendName = input.nextLine();
                                     }
@@ -144,19 +149,19 @@ public class Main {
 
                                         System.out.print("\nFriend request sent\n");
                                     }
-                                    System.out.print("\n----MENU----\n");
+                                    
                                 }
                                 if(menuNavigation == 4)
                                 {
-                                    if(logged.frRequest.isEmpty())
+                                    if(logged.friendRequest.isEmpty())
                                     {
                                         System.out.print("\nNo friend requests yet\n");
                                     }
                                     else
                                     {
-                                        for(int i = 0; i<logged.frRequest.size(); i++)
+                                        for(int i = 0; i<logged.friendRequest.size(); i++)
                                         {
-                                            String friendName = logged.frRequest.get(i);
+                                            String friendName = logged.friendRequest.get(i);
 
                                             System.out.print(friendName + "\n");
                                             System.out.print("[1] - Accept friend\n[2] - Cancel request\n");
@@ -168,20 +173,20 @@ public class Main {
                                                 Account friend = iface.accounts.get(friend_index);
                                                 logged.add_friend(friend);
                                                 friend.add_friend(logged);
-                                                logged.frRequest.remove(i);
+                                                logged.friendRequest.remove(i);
                                             }
                                             else{
-                                                logged.frRequest.remove(i);
+                                                logged.friendRequest.remove(i);
                                             }
                                         }
                                     }
-                                    System.out.print("\n---- MENU ----\n\n");
+                                    
                                 }
                                 if(menuNavigation == 5)
                                 {
                                     if(logged.friends.isEmpty())
                                     {
-                                        System.out.print("\nFriend list empty\n\n");
+                                        System.out.print("\nYou do not have friends yet!\n\n");
                                     } 
                                     else
                                     {
@@ -192,7 +197,7 @@ public class Main {
                                             else System.out.print(logged.friends.get(i).getNick() + ";\n");
                                         }
                                     }
-                                    System.out.print("---- MENU ----\n\n");
+                               
                                 }
                                 if(menuNavigation == 6)
                                 {
@@ -262,8 +267,12 @@ public class Main {
                                 }
                                 if(menuNavigation == 8)
                                 {
+                                    int lalala = 9;
                                     System.out.print("\nChats:\n\n");
-                                    if(logged.msgReceived.isEmpty()) System.out.print("Empty");
+                                    if(logged.msgReceived.isEmpty()){
+                                        System.out.print("Empty\n");
+                                        lalala = 0;
+                                    }
                                     else
                                     {
                                         for(int i=0; i<logged.msgReceived.size(); i++)
@@ -272,7 +281,9 @@ public class Main {
                                             System.out.print(logged.msgReceived.get(i).getBody() + "\n\n");
                                         }
                                     }
-                                    if(logged.msgSent.isEmpty()) System.out.print("Empty");
+                                    if(logged.msgSent.isEmpty() && lalala != 0){
+                                        System.out.print("Empty\n");
+                                    }
                                     else
                                     {
                                         System.out.print("\nMessages sent:\n\n");
@@ -286,7 +297,7 @@ public class Main {
                                 if(menuNavigation == 9)
                                 {
                                     String communityName;
-                                    System.out.print("\nCommunity name:");
+                                    System.out.print("\nCommunity name: ");
                                     input.nextLine();
                                     communityName = input.nextLine();
 
@@ -296,11 +307,10 @@ public class Main {
                                         communityName = input.nextLine();
                                     }
 
-                                    System.out.print("Description:");
+                                    System.out.print("Description: ");
                                     String description = input.nextLine();
 
                                     System.out.print("\nCommunity created\n\n");
-                                    System.out.print("---- MENU ----\n\n");
 
                                     Community my_community = new Community(communityName, description, logged);
                                     iface.communitysNames.add(communityName);
@@ -311,7 +321,7 @@ public class Main {
                                 if(menuNavigation == 10)
                                 {
                                     String communityName;
-                                    System.out.print("\nCommunity name:");
+                                    System.out.print("\nCommunity name: ");
                                     input.nextLine();
                                     communityName = input.nextLine();
 
@@ -328,17 +338,21 @@ public class Main {
                                     {
                                         int index_community = iface.communitysNames.indexOf(communityName);
                                         Community Community = iface.communitys.get(index_community);
-
+                                        int lala = 9;
                                         while(Community.members.contains(logged))
                                         {
                                             System.out.print("\nYou're already a member");
+                                            lala = 0;
+                                            break;
                                         }
                                         index_community = iface.communitysNames.indexOf(communityName);
                                         Community = iface.communitys.get(index_community);
 
                                         Community.joinRqt.add(logged.getNick());
-
-                                        System.out.print("\nMember request sent\n\n");
+                                        if(lala != 0)
+                                        {
+                                            System.out.print("\nMember request sent\n\n");
+                                        }
                                         System.out.print("---- MENU ----\n\n");
                                     }
                                 }
@@ -367,12 +381,12 @@ public class Main {
                                                 while(cmtHost != 6)
                                                 {
                                                     System.out.print("\n----COMMUNITY MENU---- \n");
-                                                    System.out.print("[1] - Add member;\n");
-                                                    System.out.print("[2] - Check join requests;\n");
-                                                    System.out.print("[3] - Ban member;\n");
-                                                    System.out.print("[4] - See members;\n");
-                                                    System.out.print("[5] - Delete community;\n");
-                                                    System.out.print("[6] - Exit community\n");
+                                                    System.out.print("[1] - Add member\n");
+                                                    System.out.print("[2] - Check join requests\n");
+                                                    System.out.print("[3] - Ban member\n");
+                                                    System.out.print("[4] - See members\n");
+                                                    System.out.print("[5] - Delete community\n");
+                                                    System.out.print("[6] - Back\n");
                                                     cmtHost = input.nextInt();
                                                     if(cmtHost == 1)
                                                     {
@@ -408,7 +422,7 @@ public class Main {
                                                             {
                                                                 System.out.print(open.joinRqt.get(i));
                                                                 System.out.print("Want to enter your community?\n");
-                                                                System.out.print("[1] - Accept;\n[2] - Reject.\n");
+                                                                System.out.print("[1] - Accept\n[2] - Reject\n");
                                                                 int accept = input.nextInt();
                                                                 if(accept == 1)
                                                                 {
@@ -464,7 +478,6 @@ public class Main {
                                                         iface.communitys.remove(open);
                                                         iface.communitysNames.remove(open.getName());
                                                         System.out.print("\nCommunity deleted!\n\n");
-                                                        System.out.print("---- MENU ----\n\n");
                                                         cmtHost = 6;
                                                     }
                                                 }
