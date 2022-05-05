@@ -1,63 +1,60 @@
 import java.util.ArrayList;
 
-public class Account {
+public class Community {
 
-    ArrayList<Account> friends = new ArrayList<Account>();
-    ArrayList<String> friendName = new ArrayList<String>();
-    ArrayList<Community> communityMember = new ArrayList<Community>();
-    ArrayList<Community> communityHost = new ArrayList<Community>();
-    ArrayList<String> friendRequest = new ArrayList<String>();
-    ArrayList<Message> msgSent = new ArrayList<Message>();
-    ArrayList<Message> msgReceived = new ArrayList<Message>();
-    public String name;
-    public String password;
-    public String nickname;
+    public Account host;
+    public String description;
+    ArrayList<Account> members = new ArrayList<Account>();
+    ArrayList<String> memberrNmes = new ArrayList<String>();
+    ArrayList<String> joinRqt = new ArrayList<String>();
+    public String communityName;
 
-    public Account(String name, String password, String nickname)
+    public Community(String name, String description, Account host)
     {
-        this.name = name;
-        this.password = password;
-        this.nickname = nickname;
+        this.communityName = name;
+        this.host = host;
+        members.add(host);
+        memberrNmes.add(host.getName());
+        this.description = description;
+
     }
 
     public String getName()
     {
-        return this.name;
+        return communityName;
     }
 
-    public String getPassword()
+    public Account getOwner()
     {
-        return this.password;
+        return host;
     }
 
-    public String getNick()
+    public void add_member(Account member)
     {
-        return this.nickname;
+        members.add(member);
     }
 
     public void setName(String name)
     {
-        this.name = name;
+        this.communityName = name;
     }
 
-    public void setPassword(String password)
+    public void setOwner(Account new_owner)
     {
-        this.password = password;
+        this.host = new_owner;
     }
 
-    public void setNick(String nick)
+    public void delete()
     {
-        this.nickname = nick;
+        int j = 0;
+
+        this.members.get(j).communityHost.remove(this);
+
+        for(j=0; j<this.members.size(); j++)
+        {
+            this.members.get(j).communityMember.remove(this);
+        }
     }
 
-    public void add_request(String friendName)
-    {
-        friendRequest.add(friendName);
-    }
 
-    public void add_friend(Account friend)
-    {
-        friends.add(friend);
-        friendName.add(friend.getName());
-    }
 }
