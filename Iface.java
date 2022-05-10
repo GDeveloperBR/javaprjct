@@ -9,13 +9,13 @@ public class Iface {
     ArrayList<String> nickNames = new ArrayList<String>();
     ArrayList<String> passwords = new ArrayList<String>();
 
-    public void add(Account x)
+    public void add(Account conta)
     {
-        accounts.add(x);
+        accounts.add(conta);
     }
 
-    public void set(Account x, int y)
+    public void set(Account conta, int y)
     {
-        accounts.set(y, x);
+        accounts.set(y, conta);
     }
 }
