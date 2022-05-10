@@ -55,6 +55,4 @@ public class Community {
             this.members.get(j).communityMember.remove(this);
         }
     }
-
-
 }
