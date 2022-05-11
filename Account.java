@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Account {
+public class Account extends Person{
     ArrayList<Account> friends = new ArrayList<Account>();
     ArrayList<String> friendName = new ArrayList<String>();
     ArrayList<Community> communityMember = new ArrayList<Community>();
@@ -8,12 +8,21 @@ public class Account {
     ArrayList<String> friendRequest = new ArrayList<String>();
     ArrayList<Message> msgSent = new ArrayList<Message>();
     ArrayList<Message> msgReceived = new ArrayList<Message>();
-    private String name, password, nickname;
+    //ArrayList<Mail> admMail = new ArrayList<Mail>();
+    //private String name, password, nickname;
+    public class AdmUser extends Person{
+        public static int admpass = 57245321;
+    }
+    // public class SystemAdm extends Account{
+    //     public admin(String admName, String admEmail, int admPass){
+    //         super(admName, admEmail, admPass);
+    //     }
+    // }
 
     public Account(String name, String password, String nickname)
     {
         this.name = name;
-        this.password = password;
+        setPassword(password);
         this.nickname = nickname;
     }
 
@@ -22,10 +31,10 @@ public class Account {
         return this.name;
     }
 
-    public String getPassword()
-    {
-        return this.password;
-    }
+    // public String getPassword()
+    // {
+    //     return this.password;
+    // }
 
     public String getNick()
     {
@@ -37,10 +46,10 @@ public class Account {
         this.name = name;
     }
 
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
+    // public void setPassword(String password)
+    // {
+    //     this.password = password;
+    // }
 
     public void setNick(String nick)
     {
