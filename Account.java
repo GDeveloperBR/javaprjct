@@ -8,9 +8,7 @@ public class Account {
     ArrayList<String> friendRequest = new ArrayList<String>();
     ArrayList<Message> msgSent = new ArrayList<Message>();
     ArrayList<Message> msgReceived = new ArrayList<Message>();
-    public String name;
-    public String password;
-    public String nickname;
+    private String name, password, nickname;
 
     public Account(String name, String password, String nickname)
     {
