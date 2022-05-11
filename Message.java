@@ -1,8 +1,8 @@
 public class Message {
 
-    public Account receiver;
-    public Account sender;
-    public String body;
+    private Account receiver;
+    private Account sender;
+    private String body;
     boolean read;
 
     public Message(String body, Account receiver, Account sender)
@@ -27,5 +27,4 @@ public class Message {
     {
         return sender.getName();
     }
-
 }
