@@ -244,11 +244,11 @@ public class Main {
                                                 System.out.print("New message ->" + logged.msgReceived.get(i).getSender() + ".\n");
                                                 System.out.print("\n" + logged.msgReceived.get(i).getBody() + "\n");
                                                 logged.msgReceived.get(i).read = true;
-                                                System.out.print("[1] - msgop;\n[2] - Mark as read\n");
+                                                System.out.print("[1] - Answer;\n[2] - Mark as read\n");
                                                 input.nextLine();
-                                                int msgop = input.nextInt();
+                                                int auxxxx = input.nextInt();
 
-                                                if (msgop == 1)
+                                                if (auxxxx == 1)
                                                 {
                                                     System.out.print("\nMessage:\n");
                                                     input.nextLine();
