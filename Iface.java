@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Iface {
+public class Iface{
 
     ArrayList<Account> accounts = new ArrayList<Account>();
     ArrayList<Community> communitys = new ArrayList<Community>();
@@ -13,7 +13,6 @@ public class Iface {
     {
         accounts.add(conta);
     }
-
     public void set(Account conta, int y)
     {
         accounts.set(y, conta);
