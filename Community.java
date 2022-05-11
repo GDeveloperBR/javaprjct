@@ -1,22 +1,20 @@
 import java.util.ArrayList;
 
 public class Community {
-
     public Account host;
     public String description;
     ArrayList<Account> members = new ArrayList<Account>();
-    ArrayList<String> memberrNmes = new ArrayList<String>();
+    ArrayList<String> membersName = new ArrayList<String>();
     ArrayList<String> joinRqt = new ArrayList<String>();
-    public String communityName;
+    private String communityName;
 
     public Community(String name, String description, Account host)
     {
         this.communityName = name;
         this.host = host;
         members.add(host);
-        memberrNmes.add(host.getName());
+        membersName.add(host.getName());
         this.description = description;
-
     }
 
     public String getName()
