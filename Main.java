@@ -8,6 +8,7 @@ public class Main {
             Scanner input = new Scanner(System.in);
             Iface iface = new Iface();
             int aux1 = 1, aux2 = 1;
+            System.out.print("\n");
             while(aux2 != 2)
             {
                 System.out.println("-->> What do you want to do? <<--\n[1] - SignUp\n[2] - LogIn\n[99] - Exit");
@@ -19,9 +20,26 @@ public class Main {
                 }
 
                 String username, password, name;
+                //String email;
+                // int admpassword;
 
                 switch(aux1)
-                {
+                {   
+
+                    // case 3:
+                        
+                    //     System.out.print("\nEmail: ");
+                    //     input.nextLine();
+                    //     email = input.nextLine();
+                    //     System.out.print("\nADMIN password: ");
+                    //     admpassword = input.nextInt();
+                    //     System.out.print(email);
+                    //     System.out.print(admpassword);
+                    //     if(email == "g.vbatista@hotmail.com" && admpassword == Account.AdmUser.admpass)
+                    //     {
+                    //         System.out.print("LINHA 36");
+                    //     }
+
                     case 1:
                         System.out.print("\nFirst name: ");
                         input.nextLine();
@@ -131,7 +149,7 @@ public class Main {
                                     System.out.print("-->> These are your account info <<--\n");
                                     System.out.print("\nName: " + logged.getName());
                                     System.out.print("\nUser: " + logged.getNick());              
-                                    System.out.print("\nPassword: " + logged.getPassword());
+                                    System.out.print("\nPassword: " + logged.getPass());
                                     System.out.print("\n\n");
                                 }
                                 if(menuNavigation == 3)
@@ -403,7 +421,7 @@ public class Main {
                                                             System.out.print("\nAccount not found.\nAccount name:");
                                                             memberCmtName = input.nextLine();
                                                         }
-                                                        if(open.memberrNmes.contains(memberCmtName))
+                                                        if(open.membersName.contains(memberCmtName))
                                                         {
                                                             System.out.print(memberCmtName + "is already a member");
                                                         }
@@ -411,7 +429,7 @@ public class Main {
                                                         Account member = iface.accounts.get(member_index);
                                                         member.communityMember.add(open);
                                                         open.add_member(member);
-                                                        open.memberrNmes.add(member.getName());
+                                                        open.membersName.add(member.getName());
                                                         System.out.print("\nMember added\n\n");
                                                     }
                                                     if(cmtHost == 2)
@@ -435,7 +453,7 @@ public class Main {
 
                                                                     member.communityMember.add(open);
                                                                     open.add_member(member);
-                                                                    open.memberrNmes.add(member.getName());
+                                                                    open.membersName.add(member.getName());
                                                                     open.joinRqt.remove(i);
                                                                     System.out.print("\nMember accepted\n\n");
                                                                 }
@@ -454,15 +472,15 @@ public class Main {
                                                         System.out.print("\nMember name:");
                                                         input.nextLine();
                                                         memberCmtName = input.nextLine();
-                                                        while(!open.memberrNmes.contains(memberCmtName))
+                                                        while(!open.membersName.contains(memberCmtName))
                                                         {
                                                             System.out.print("\nMember not found! Try again: ");
                                                             memberCmtName = input.nextLine();
                                                         }
-                                                        int member_index = open.memberrNmes.indexOf(memberCmtName);
+                                                        int member_index = open.membersName.indexOf(memberCmtName);
                                                         Account member = open.members.get(member_index);
                                                         open.members.remove(member);
-                                                        open.memberrNmes.remove(memberCmtName);
+                                                        open.membersName.remove(memberCmtName);
                                                         member.communityMember.remove(open);
                                                         System.out.print("\nMember banned!\n\n");
                                                     }
@@ -518,7 +536,7 @@ public class Main {
                                     for(i=0; i<logged.communityMember.size(); i++)
                                     {
                                         logged.communityMember.get(i).members.remove(logged);
-                                        logged.communityMember.get(i).memberrNmes.remove(logged.getName());
+                                        logged.communityMember.get(i).membersName.remove(logged.getName());
                                     }
                                     for(i=0; i<logged.communityHost.size(); i++)
                                     {
@@ -527,7 +545,7 @@ public class Main {
                                         logged.communityHost.get(i).delete();
                                     }
                                     iface.names.remove(logged.getName());
-                                    iface.passwords.remove(logged.getPassword());
+                                    iface.passwords.remove(logged.getPass());
                                     iface.nickNames.remove(logged.getNick());
                                     iface.accounts.remove(logged);
                                     System.out.print("\nDone!\n\n");
