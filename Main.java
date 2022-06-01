@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class Main {
@@ -7,22 +8,32 @@ public class Main {
     {
             Scanner input = new Scanner(System.in);
             Iface iface = new Iface();
-            int aux1 = 1, aux2 = 1;
+            int aux1 = 1, aux2 = 1, code = 1;
             System.out.print("\n");
             while(aux2 != 2)
             {
-                System.out.println("-->> What do you want to do? <<--\n[1] - SignUp\n[2] - LogIn\n[99] - Exit");
-                aux1 = input.nextInt();
+                while(code == 1){
+                    System.out.println("-->> What do you want to do? <<--\n[1] - SignUp\n[2] - LogIn\n[99] - Exit");
+                    try{
+                        //input.nextLine();
+                        aux1 = input.nextInt();
+                        code = 0;
+                    }
+                    catch(InputMismatchException e){
+                        System.out.print("\n>>> Error - You have to choose a number! <<<\n\n");
+                        code = 1;
+                        input.nextLine();
+                    }
+                }
                 if(aux1 == 99)
                 {
                     System.out.print("\n\n ->>> Bye bye, have a nice day! <<<- \n\n\n");
                     break;
                 }
-
                 String username, password, name;
-                //String email;
+                code = 1;
+                // String email;
                 // int admpassword;
-
                 switch(aux1)
                 {   
 
@@ -41,6 +52,7 @@ public class Main {
                     //     }
 
                     case 1:
+                        System.out.print("\nYour datas may have any ABNT2 Keyboard characters!");
                         System.out.print("\nFirst name: ");
                         input.nextLine();
                         name = input.nextLine();
@@ -68,11 +80,13 @@ public class Main {
 
                         Account newAccount = new Account(name, password, username);
                         iface.add(newAccount);
-                        System.out.print("\nAccount created. Press [1] to LogIn: ");
-                        aux2 = input.nextInt();
-                        aux1 = 1;
+                        System.out.print("\nAccount created. Press any key to return\n");
+                        input.nextLine();
+                        break;
                     case 2:
                         //System.out.print("Linha 52");
+                        
+                        System.out.print(">>> You are in Log In Screen <<< \n");
                         System.out.print("\nUser: ");
                         input.nextLine();
                         username = input.nextLine();
@@ -105,8 +119,19 @@ public class Main {
                             int menuNavigation = 1;
                             while(menuNavigation != 14)
                             {
-                                System.out.println("-->> What do you want to do? <<-- \n[1] - Change profile\n[2] - Account info\n[3] - Add new friend\n[4] - Friend requests\n[5] - Friends\n[6] - Send message\n[7] - New messages\n[8] - Chats\n[9] - New community\n[10] - Search community\n[11] - Community admin painel\n[12] - Community list\n[13] - Delete my profile\n[14] - Logout");
-                                menuNavigation = input.nextInt();
+                                code = 1;
+                                while(code == 1){                                
+                                    try{
+                                        System.out.println("-->> What do you want to do? <<-- \n[1] - Change profile\n[2] - Account info\n[3] - Add new friend\n[4] - Friend requests\n[5] - Friends\n[6] - Send message\n[7] - New messages\n[8] - Chats\n[9] - New community\n[10] - Search community\n[11] - Community admin painel\n[12] - Community list\n[13] - Delete my profile\n[14] - Logout");
+                                        menuNavigation = input.nextInt();
+                                        code = 0;
+                                    }
+                                    catch(InputMismatchException e){
+                                        System.out.print("\n>>> Error - You have to choose a number! <<<\n\n");
+                                        code = 1;
+                                        input.nextLine();
+                                    }
+                                }                                
                                 if(menuNavigation == 1)
                                 {
                                     System.out.print("\n -- Change profile info -- \n");
@@ -153,7 +178,7 @@ public class Main {
                                     System.out.print("\n\n");
                                 }
                                 if(menuNavigation == 3)
-                                {
+                                {   
                                     System.out.print("\nFriend's name:");
                                     input.nextLine();
                                     String friendName = input.nextLine();
@@ -184,11 +209,22 @@ public class Main {
                                         for(int i = 0; i<logged.friendRequest.size(); i++)
                                         {
                                             String friendName = logged.friendRequest.get(i);
-
+                                            int friendshipKey = 1;
                                             System.out.print(friendName + "\n");
-                                            System.out.print("[1] - Accept friend\n[2] - Cancel request\n");
-                                            int friendshipKey = input.nextInt();
-
+                                            code = 1;
+                                            while(code == 1){
+                                                System.out.print("[1] - Accept friend\n[2] - Cancel request\n");
+                                                try{
+                                                    friendshipKey = input.nextInt();
+                                                    code = 0;
+                                                }
+                                                catch(InputMismatchException e){
+                                                    System.out.print("\n>>> Error - You have to choose a number! <<<\n\n");
+                                                    code = 1;
+                                                    input.nextLine();
+                                                }
+                                            }
+                                            
                                             if(friendshipKey == 1)
                                             {
                                                 int friend_index = iface.names.indexOf(friendName);
@@ -259,13 +295,24 @@ public class Main {
                                         {
                                             if (!logged.msgReceived.get(i).read)
                                             {
+                                                int auxxxx = 1;
                                                 System.out.print("New message ->" + logged.msgReceived.get(i).getSender() + ".\n");
                                                 System.out.print("\n" + logged.msgReceived.get(i).getBody() + "\n");
                                                 logged.msgReceived.get(i).read = true;
-                                                System.out.print("[1] - Answer;\n[2] - Mark as read\n");
-                                                input.nextLine();
-                                                int auxxxx = input.nextInt();
-
+                                                while(code == 1){
+                                                    System.out.print("[1] - Answer;\n[2] - Mark as read\n");
+                                                    input.nextLine();
+                                                    try{
+                                                        auxxxx = input.nextInt();
+                                                        code = 0;
+                                                    }
+                                                    catch(InputMismatchException e){
+                                                        System.out.print("\n>>> Error - You have to choose a number! <<<\n\n");
+                                                        code = 1;
+                                                        input.nextLine();
+                                                    }
+                                                }
+                                                code = 1;
                                                 if (auxxxx == 1)
                                                 {
                                                     System.out.print("\nMessage:\n");
@@ -386,30 +433,54 @@ public class Main {
                                     }
                                     else
                                     {
-                                        int manage, cmtHost;
+                                        int manage = 1, cmtHost;
                                         Community open;
                                         for(int i=0; i<logged.communityHost.size(); i++)
                                         {
-                                            System.out.print("\nDo you want to manage " + logged.communityHost.get(i).getName() + "?\n");
-                                            System.out.print("[1] - Yes;\n[2] - No.\n");
-                                            input.nextLine();
-                                            manage = input.nextInt();
-
+                                            code = 1;
+                                            while(code == 1){
+                                                System.out.print("\nDo you want to manage " + logged.communityHost.get(i).getName() + "?\n");
+                                                System.out.print("[1] - Yes;\n[2] - No.\n");
+                                                try{
+                                                    input.nextLine();
+                                                    manage = input.nextInt();
+                                                    code = 0;
+                                                }
+                                                catch(InputMismatchException e){
+                                                    System.out.print("\n>>> Error - You have to choose a number! <<<\n\n");
+                                                    code = 1;
+                                                    input.nextLine();
+                                                }
+                                            }
+                                            
                                             if(manage == 1)
                                             {
                                                 open = logged.communityHost.get(i);
                                                 cmtHost = 1;
-
+                                    
+                                                //boolean correctInput = false;
                                                 while(cmtHost != 6)
                                                 {
-                                                    System.out.print("\n----COMMUNITY MENU---- \n");
-                                                    System.out.print("[1] - Add member\n");
-                                                    System.out.print("[2] - Check join requests\n");
-                                                    System.out.print("[3] - Ban member\n");
-                                                    System.out.print("[4] - See members\n");
-                                                    System.out.print("[5] - Delete community\n");
-                                                    System.out.print("[6] - Back\n");
-                                                    cmtHost = input.nextInt();
+                                                    while(code == 1){
+                                                        System.out.print("\n----COMMUNITY MENU---- \n");
+                                                        System.out.print("[1] - Add member\n");
+                                                        System.out.print("[2] - Check join requests\n");
+                                                        System.out.print("[3] - Ban member\n");
+                                                        System.out.print("[4] - See members\n");
+                                                        System.out.print("[5] - Delete community\n");
+                                                        System.out.print("[6] - Back\n");
+
+                                                        try{                                                        
+                                                        cmtHost = input.nextInt();        
+                                                        code = 0;                                               
+                                                        }
+                                                        catch(InputMismatchException e){
+                                                            System.out.print("\n>>> Error - You have to choose a number! <<<\n\n");
+                                                            code = 1;
+                                                            input.nextLine();
+                                                        }
+                                                    }
+                                                    code = 1;
                                                     if(cmtHost == 1)
                                                     {
                                                         String memberCmtName;
@@ -432,8 +503,9 @@ public class Main {
                                                         open.membersName.add(member.getName());
                                                         System.out.print("\nMember added\n\n");
                                                     }
-                                                    if(cmtHost == 2)
+                                                    if(cmtHost == 2)                                                
                                                     {
+                                                        int accept = 1;
                                                         if(open.joinRqt.isEmpty())
                                                         {
                                                             System.out.print("\nRequest box empty\n");
@@ -442,10 +514,19 @@ public class Main {
                                                         {
                                                             for(i=0; i<open.joinRqt.size(); i++)
                                                             {
-                                                                System.out.print(open.joinRqt.get(i));
-                                                                System.out.print(" want to enter your community?\n");
-                                                                System.out.print("[1] - Accept\n[2] - Reject\n");
-                                                                int accept = input.nextInt();
+                                                                while(code == 1){
+                                                                    System.out.print(" want to enter your community?\n");
+                                                                    System.out.print("[1] - Accept\n[2] - Reject\n");
+                                                                    try{
+                                                                        accept = input.nextInt();
+                                                                        code = 0;
+                                                                    }
+                                                                    catch(InputMismatchException e){
+                                                                        System.out.print("\n>>> Error - You have to choose a number! <<<\n\n");
+                                                                        code = 1;
+                                                                        input.nextLine();
+                                                                    }
+                                                                }                                                                
                                                                 if(accept == 1)
                                                                 {
                                                                     int member_index = iface.nickNames.indexOf(open.joinRqt.get(i));
@@ -549,11 +630,16 @@ public class Main {
                                     iface.nickNames.remove(logged.getNick());
                                     iface.accounts.remove(logged);
                                     System.out.print("\nDone!\n\n");
+                                    //aux1 = 1;
                                     menuNavigation = 14;
                                 }
                             }
                         }
+                        aux2 = 1;
+                        aux1 = 0;
+                        break;
                     }
             }
+        input.close();
     }
 }
