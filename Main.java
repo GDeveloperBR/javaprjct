@@ -515,7 +515,7 @@ public class Main {
                                                             for(i=0; i<open.joinRqt.size(); i++)
                                                             {
                                                                 while(code == 1){
-                                                                    System.out.print(" want to enter your community?\n");
+                                                                    System.out.print(" Want to enter your community?\n");
                                                                     System.out.print("[1] - Accept\n[2] - Reject\n");
                                                                     try{
                                                                         accept = input.nextInt();
